@@ -1,0 +1,6 @@
+[submodule "hiddify-sing-box"]
+	path = hiddify-sing-box
+	url = https://github.com/mn-hacker/Hiddify-Custom-SingBox.git
+[submodule "ray2sing"]
+	path = ray2sing
+	url = https://github.com/mn-hacker/ray2sing.git
