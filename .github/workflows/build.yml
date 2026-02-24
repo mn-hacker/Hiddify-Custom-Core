@@ -89,14 +89,15 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          - { name: 'hiddify-cli-android', os: 'ubuntu-latest', target: 'android'}
+          # Mobile builds disabled - not needed for CLI
+          # - { name: 'hiddify-cli-android', os: 'ubuntu-latest', target: 'android'}
           - { name: 'hiddify-cli-linux-amd64', os: 'ubuntu-22.04', target: 'linux-amd64',  arch: 'amd64', naive: true , corenet: 'linux/amd64', build_corenet: true }
           - { name: 'hiddify-cli-linux-arm64', os: 'ubuntu-latest', target: 'linux-arm64', naive: true ,  arch: 'arm64', corenet: 'linux/arm64', build_corenet: true }
           # - { name: 'hiddify-cli-linux-amd64-musl', os: 'ubuntu-22.04', variant: 'musl', target: 'linux-amd64',  arch: 'amd64', naive: true , corenet: 'linux/amd64', build_corenet: true }
           # - { name: 'hiddify-cli-linux-arm64-musl', os: 'ubuntu-latest', variant: 'musl', target: 'linux-arm64', naive: true ,  arch: 'arm64', corenet: 'linux/arm64', build_corenet: true }
           - { name: "hiddify-cli-windows-amd64", os: 'ubuntu-latest', target: 'windows-amd64', aarch: 'x64', naive: true, corenet: 'windows/amd64' }
           - { name: "hiddify-cli-macos", os: 'macos-15', target: 'macos'  }
-          - { name: "hiddify-cli-ios", os: "macos-15", target: "ios" }
+          # - { name: "hiddify-cli-ios", os: "macos-15", target: "ios" }
           # # linux custom
           # - {name: hiddify-core-linux-amd64, goos: linux, goarch: amd64, goamd64: v1, target: 'linux-custom', os: 'ubuntu-22.04', naive: true }
           # - {name: hiddify-core-linux-amd64-v3, goos: linux, goarch: amd64, goamd64: v3, target: 'linux-custom', os: 'ubuntu-22.04', naive: true }
@@ -221,8 +222,8 @@ jobs:
 
   build-binary:
     name: Build binary
-    # if: github.event_name != 'workflow_dispatch' || inputs.build == 'All' || inputs.build == 'Binary'
-    if: ${{ inputs.channel=='prod' }}
+    # Disabled: main build job already produces CLI binaries for all needed platforms
+    if: false # ${{ inputs.channel=='prod' }}
     runs-on: ubuntu-latest
     needs:
       - calculate_version
