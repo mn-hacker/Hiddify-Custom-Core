@@ -40,13 +40,13 @@ jobs:
           echo "version=${{ inputs.version }}" >> "$GITHUB_ENV"
       
       - name: Check input version
-        if: github.event_name != 'workflow_dispatch' && "${{ inputs.tag-name }}" != "draft"
+        if: ${{ github.event_name != 'workflow_dispatch' && inputs.tag-name != 'draft' }}
         run: |-
           echo "hiddify_version=${{ inputs.tag-name }}"
           echo "hiddify_version=${{ inputs.tag-name }}" >> "$GITHUB_ENV"
               
       - name: Calculate version
-        if: github.event_name != 'workflow_dispatch' && "${{ inputs.tag-name }}" == "draft"
+        if: ${{ github.event_name != 'workflow_dispatch' && inputs.tag-name == 'draft' }}
         run: |-
           echo "hiddify_version=$(git describe --tags)" >> "$GITHUB_ENV"
       - name: Calculate singbox version
