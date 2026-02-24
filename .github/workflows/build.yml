@@ -68,13 +68,13 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           git checkout -b main
-          curl -L -o hiddify-core.tar.gz https://codeload.github.com/hiddify/hiddify-core/tar.gz/${{ inputs.tag-name  }}
+          curl -L -o hiddify-core.tar.gz https://codeload.github.com/mn-hacker/Hiddify-Custom-Core/tar.gz/${{ inputs.tag-name  }}
           HIDDIFY_CORE_WRT_HASH=$(sha256sum hiddify-core.tar.gz | cut -d' ' -f1)
           github_ref_name="${{ inputs.tag-name }}"
           IFS="." read -r -a VERSION_ARRAY <<< "${github_ref_name#v}"
           VERSION_STR="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.${VERSION_ARRAY[2]}"
-          sed -i "s|PKG_VERSION:=.*|PKG_VERSION:=${VERSION_STR}|g" wrt/Makefile
-          sed -i "s|PKG_HASH:=.*|PKG_HASH:=${HIDDIFY_CORE_WRT_HASH}|g" wrt/Makefile 
+          sed -i "s|PKG_VERSION:=.*|PKG_VERSION:=${VERSION_STR}|g" platform/wrt/Makefile
+          sed -i "s|PKG_HASH:=.*|PKG_HASH:=${HIDDIFY_CORE_WRT_HASH}|g" platform/wrt/Makefile 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
             commit_message: "Update WRT package HASH."
